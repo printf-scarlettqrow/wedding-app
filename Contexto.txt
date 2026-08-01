@@ -1,0 +1,36 @@
+Quiero construir desde cero, en Angular, una plataforma web para compartir fotos en tiempo real durante una boda (estilo "Dots"). Ya tengo un prototipo funcional en HTML/JS vanilla + Supabase que puedes usar como referencia de funcionalidad y diseño, pero quiero la versión final hecha en Angular, con buenas prácticas del framework (arquitectura, componentes, servicios, tipado). Tú decides la estructura del proyecto, las librerías auxiliares y las herramientas de build; usa tu criterio como si fuera un proyecto profesional real.
+
+DATOS DE LA BODA
+- Nombres: Josué e Ahinoam
+- Fecha: 29 de agosto, 2026
+- Clave de administrador para el panel de moderación: bodajosueino2026
+
+CONTEXTO Y RESTRICCIONES DEL EVENTO
+- Boda con ~70 invitados, ~60 participando activamente en la galería
+- Invitados escanean un código QR en las mesas y entran directo a la web, sin instalar nada (debe funcionar perfecto en navegador móvil, sin login)
+- Sin límite de fotos por invitado
+- Costo de hosting y almacenamiento debe mantenerse en $0 (bajo tráfico, evento de un día)
+- Backend: Supabase (Postgres + Storage + Realtime), plan gratuito
+
+FUNCIONALIDAD REQUERIDA (usa el prototipo adjunto como referencia, no como límite)
+1. Página de subida: cámara o galería del teléfono, subida múltiple, compresión de imágenes en el cliente antes de subir (para no gastar el almacenamiento gratuito), estado de carga y confirmación clara.
+2. Galería en vivo: cuadrícula tipo Instagram (mosaico cuadrado), se actualiza sola vía Supabase Realtime cuando alguien sube una foto nueva, con lightbox al tocar una foto.
+3. Panel de moderación: protegido con la clave de administrador indicada arriba (no necesita autenticación de nivel empresarial, es solo para evitar borrados accidentales), permite borrar fotos de Storage y de la base de datos.
+4. Diseño: identidad botánica en verde salvia y blanco, tipografía elegante para bodas, con un elemento visual distintivo (por ejemplo un motivo de rama/hoja de línea fina) — evita el look genérico de plantilla de IA. Debe verse bien y ser usable desde el celular, que es donde lo va a abrir el 100% de los invitados.
+
+STACK Y DECISIONES TÉCNICAS (tu criterio)
+- Angular (standalone components, la versión y configuración que consideres mejor para un proyecto de este tamaño)
+- Cliente de Supabase para Angular/TypeScript, con tipado de las tablas
+- Decide tú: gestión de estado, manejo de formularios, estructura de carpetas, si usar signals, SSR o no, etc. — prioriza simplicidad de mantenimiento sobre complejidad, es un proyecto que vive un solo día
+- El SQL de Supabase (tabla, RLS, políticas del bucket) también debe ajustarse a este proyecto
+
+LO QUE NECESITO QUE HAGAS DE PUNTA A PUNTA
+1. Genera el proyecto Angular completo con la estructura de componentes/servicios que decidas.
+2. Ayúdame a crear el proyecto en Supabase (CLI o guía paso a paso), correr el SQL, y crear el bucket de Storage como público.
+3. Configura las variables de entorno/credenciales de forma segura para un proyecto Angular (no hardcodeadas en el repo si lo vas a subir a GitHub).
+4. Verifica que la compresión de imágenes, la subida, el tiempo real y el borrado funcionan de extremo a extremo.
+5. Ayúdame a desplegar gratis (Vercel o Netlify, lo que sea más simple para un proyecto Angular) y dame la URL final.
+6. Dime cómo generar el código QR apuntando a la página de subida.
+7. Dame una lista de verificación para probar todo en vivo antes de la boda: una prueba real de subir/ver/borrar una foto con los datos ya cargados.
+
+Pregúntame por cualquier decisión o credencial que necesites (por ejemplo, tu cuenta de Supabase o dónde desplegar), y avísame si algo del prototipo de referencia no tiene sentido migrarlo tal cual a Angular.

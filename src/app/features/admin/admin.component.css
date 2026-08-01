@@ -1,0 +1,351 @@
+/* Admin Component Styles */
+
+/* ─── LOGIN ──────────────────────────────────────────────── */
+.admin-login-page {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1rem;
+  background: var(--cream);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 380px;
+  padding: 2rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-leaf {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 70px;
+  opacity: 0.5;
+}
+
+.login-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--sage-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--sage-600);
+}
+
+.login-icon svg { width: 26px; height: 26px; }
+
+.login-text { text-align: center; }
+
+.login-title {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--sage-700);
+}
+
+.login-sub {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  margin-top: 2px;
+}
+
+.login-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.error-msg {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--error);
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+.back-link {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+  color: var(--text-light);
+  margin-top: 0.25rem;
+  transition: color 0.2s;
+}
+.back-link:hover { color: var(--text-mid); }
+
+/* ─── PANEL HEADER ───────────────────────────────────────── */
+.admin-header-actions {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* ─── TOOLBAR ────────────────────────────────────────────── */
+.admin-toolbar {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid var(--border-light);
+  background: var(--cream);
+  flex-wrap: wrap;
+}
+
+/* ─── SELECTION BAR ──────────────────────────────────────── */
+.selection-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 1rem;
+  background: var(--sage-50);
+  border-bottom: 1px solid var(--sage-200);
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.select-all-check {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-mid);
+  cursor: pointer;
+  user-select: none;
+}
+
+.select-all-check input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--sage-600);
+  cursor: pointer;
+}
+
+.selection-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* ─── ADMIN GRID ─────────────────────────────────────────── */
+.admin-main {
+  flex: 1;
+  padding: 0.75rem;
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 0.75rem;
+}
+
+.admin-card {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--sh-sm);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.admin-card.selected {
+  border-color: var(--sage-500);
+  box-shadow: 0 0 0 2px rgba(82,122,71,0.2);
+}
+
+.admin-img-wrap {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.admin-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s;
+}
+
+.admin-card:hover .admin-img-wrap img {
+  transform: scale(1.04);
+}
+
+.select-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(20,40,20,0.15);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 0.5rem;
+}
+
+.check-circle {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid white;
+  background: rgba(255,255,255,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.check-circle.checked {
+  background: var(--sage-600);
+  border-color: var(--sage-600);
+}
+
+.admin-card-info {
+  padding: 0.45rem 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  background: var(--sage-50);
+  border-top: 1px solid var(--border-light);
+}
+
+.admin-uploader {
+  display: flex;
+  align-items: center;
+  gap: 0.28rem;
+  font-size: 0.74rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admin-date {
+  font-size: 0.66rem;
+  color: var(--text-light);
+}
+
+.admin-delete-btn {
+  border-radius: 0;
+  font-size: 0.78rem;
+  padding: 0.45rem;
+  border: none;
+  border-top: 1px solid #f5c6c2;
+}
+
+/* ─── MISC ───────────────────────────────────────────────── */
+.loading-state {
+  display: flex;
+  justify-content: center;
+  padding: 4rem;
+}
+
+.empty-panel {
+  text-align: center;
+  color: var(--text-light);
+  padding: 4rem;
+  font-size: 0.9rem;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+.spinning { animation: spin 0.9s linear infinite; }
+
+/* ─── DRIVE SECTION ────────────────────────────── */
+.drive-section {
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid var(--border-light);
+  background: var(--white);
+}
+
+.drive-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.drive-row--ok  { /* connected - no extra styles needed */ }
+.drive-row--off { opacity: 0.8; }
+
+.drive-icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.drive-icon-off {
+  width: 20px;
+  height: 20px;
+  color: var(--text-light);
+  flex-shrink: 0;
+}
+
+.drive-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.drive-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.drive-label--ok { color: #1a7a42; }
+
+.drive-sublabel {
+  font-size: 0.72rem;
+  color: var(--text-light);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.drive-actions {
+  display: flex;
+  gap: 0.35rem;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Drive banner en la pantalla de login */
+.drive-login-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.55rem 0.75rem;
+  border-radius: var(--r-sm);
+  width: 100%;
+  margin-top: 0.25rem;
+}
+
+.drive-login-banner--ok {
+  background: #ecfdf5;
+  color: #1a7a42;
+  border: 1px solid #a7f3d0;
+}
+
+.drive-login-banner--err {
+  background: #fff1f0;
+  color: var(--error);
+  border: 1px solid #fecaca;
+}
