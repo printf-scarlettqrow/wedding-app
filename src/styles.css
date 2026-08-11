@@ -4,7 +4,19 @@
    Mobile-first
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+
+/* ─── FONTS ──────────────────────────────────────────────── */
+@font-face {
+  font-family: 'LaLuxes-regular';
+  src: url('/fonts/LaLuxes-regular.otf') format('opentype'),
+       url('/fonts/LaLuxes-regular.ttf') format('truetype'),
+       url('/fonts/LaLuxes-regular.woff2') format('woff2'),
+       url('/fonts/LaLuxes-regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* ─── TOKENS ─────────────────────────────────────────────── */
 :root {

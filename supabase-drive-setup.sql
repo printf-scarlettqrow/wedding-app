@@ -28,7 +28,7 @@ VALUES ('wedding-originals', 'wedding-originals', false)
 ON CONFLICT (id) DO NOTHING;
 
 -- Invitados pueden subir originales (anon)
-CREATE POLICY IF NOT EXISTS "Allow guest uploads to originals"
+CREATE POLICY "Allow guest uploads to originals"
   ON storage.objects
   FOR INSERT
   TO anon, authenticated

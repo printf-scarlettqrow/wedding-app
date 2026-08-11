@@ -4,6 +4,13 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () =>
+      import('./features/landing/landing.component').then(
+        (m) => m.LandingComponent
+      ),
+  },
+  {
+    path: 'subir',
+    loadComponent: () =>
       import('./features/upload/upload.component').then(
         (m) => m.UploadComponent
       ),

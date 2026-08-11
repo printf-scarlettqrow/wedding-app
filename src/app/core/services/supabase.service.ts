@@ -10,6 +10,7 @@ export interface Photo {
   uploader_name?: string;
   drive_file_id?: string;
   media_type?: 'image' | 'video';
+  description?: string;
 }
 
 export interface DriveStatus {
@@ -88,7 +89,8 @@ export class SupabaseService {
   async uploadPhoto(
     file: File,
     uploaderName?: string,
-    mediaType: 'image' | 'video' = 'image'
+    mediaType: 'image' | 'video' = 'image',
+    description?: string
   ): Promise<{ success: boolean; error?: string; photoId?: string; publicUrl?: string }> {
     const ext      = file.name.split('.').pop() ?? 'jpg';
     const fileName = `${Date.now()}_${Math.random().toString(36).slice(2)}.${ext}`;
@@ -112,6 +114,7 @@ export class SupabaseService {
         public_url:    urlData.publicUrl,
         uploader_name: uploaderName ?? null,
         media_type:    mediaType,
+        description:   description ?? null,
       })
       .select('id')
       .single();

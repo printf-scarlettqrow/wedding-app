@@ -64,6 +64,11 @@ import { SupabaseService, Photo } from '../../core/services/supabase.service';
                 @if (photo.uploader_name) {
                   <span class="photo-author">{{ photo.uploader_name }}</span>
                 }
+                @if (photo.description) {
+                  <span class="photo-description" style="position: absolute; bottom: 0; left: 0; right: 0; padding: 12px 8px 8px; background: linear-gradient(transparent, rgba(0,0,0,0.7)); color: white; font-size: 11px; z-index: 10;">
+                    {{ photo.description }}
+                  </span>
+                }
               </button>
             }
           </div>
@@ -103,6 +108,11 @@ import { SupabaseService, Photo } from '../../core/services/supabase.service';
           />
           @if (lightboxPhoto()!.uploader_name) {
             <p class="lightbox-caption">📸 {{ lightboxPhoto()!.uploader_name }}</p>
+          }
+          @if (lightboxPhoto()!.description) {
+            <p class="lightbox-caption" style="margin-top: 4px; font-size: 14px; opacity: 0.9;">
+              {{ lightboxPhoto()!.description }}
+            </p>
           }
         </div>
       }

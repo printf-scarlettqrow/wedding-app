@@ -13,7 +13,8 @@ import imageCompression from 'browser-image-compression';
 import { SupabaseService } from '../../core/services/supabase.service';
 import { GuestService } from '../../core/services/guest.service';
 
-type AppScreen = 'welcome' | 'instructions' | 'name' | 'upload';
+type AppScreen = 'instructions' | 'name' | 'upload';
+import { Router } from '@angular/router';
 
 interface FileItem {
   file: File;
@@ -21,6 +22,7 @@ interface FileItem {
   status: 'pending' | 'uploading' | 'done' | 'error';
   error?: string;
   isVideo: boolean;
+  description: string;
 }
 
 interface Toast {
@@ -58,9 +60,10 @@ const STEPS = [
 export class UploadComponent implements OnInit {
   private supabase = inject(SupabaseService);
   guest = inject(GuestService);
+  private router = inject(Router);
 
   /* ── Onboarding ── */
-  screen = signal<AppScreen>('welcome');
+  screen = signal<AppScreen>('instructions');
   instructionStep = signal(0);
   steps = STEPS;
   nameInput = '';
@@ -85,7 +88,6 @@ export class UploadComponent implements OnInit {
   }
 
   /* ── Onboarding navigation ── */
-  goToInstructions() { this.screen.set('instructions'); }
 
   nextStep() {
     if (this.instructionStep() < this.steps.length - 1) {
@@ -96,7 +98,7 @@ export class UploadComponent implements OnInit {
   }
 
   skipInstructions() { this.screen.set('name'); }
-  goToWelcome()      { this.screen.set('welcome'); }
+  goToWelcome()      { this.router.navigate(['/']); }
 
   submitName() {
     this.guest.saveName(this.nameInput);
@@ -136,6 +138,7 @@ export class UploadComponent implements OnInit {
       preview: URL.createObjectURL(f),
       status:  'pending',
       isVideo: f.type.startsWith('video/'),
+      description: '',
     }));
     this.files.update((curr) => [...curr, ...items]);
   }
@@ -143,6 +146,11 @@ export class UploadComponent implements OnInit {
   clearAll() {
     this.files().forEach((f) => URL.revokeObjectURL(f.preview));
     this.files.set([]);
+  }
+
+  removeItem(item: FileItem) {
+    URL.revokeObjectURL(item.preview);
+    this.files.update((curr) => curr.filter((f) => f.preview !== item.preview));
   }
 
   async uploadAll() {
@@ -177,7 +185,8 @@ export class UploadComponent implements OnInit {
         const result = await this.supabase.uploadPhoto(
           fileForGallery,
           this.guest.guestName() || undefined,
-          isVideo ? 'video' : 'image'
+          isVideo ? 'video' : 'image',
+          item.description
         );
 
         if (result.success && result.photoId) {

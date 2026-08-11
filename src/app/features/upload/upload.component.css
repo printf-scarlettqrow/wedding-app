@@ -362,6 +362,34 @@
   transition: background 0.2s;
 }
 
+.btn-remove-item {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.65);
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.15s, background 0.15s;
+}
+
+.btn-remove-item svg {
+  width: 14px;
+  height: 14px;
+}
+
+.btn-remove-item:hover {
+  background: rgba(184, 50, 50, 0.9);
+  transform: scale(1.1);
+}
+
 .preview-item.st-uploading .preview-overlay { background: rgba(0,0,0,0.45); }
 .preview-item.st-done .preview-overlay      { background: rgba(30,100,60,0.4); }
 .preview-item.st-error .preview-overlay     { background: rgba(184,50,50,0.45); }

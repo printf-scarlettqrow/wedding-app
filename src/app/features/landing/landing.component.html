@@ -1,0 +1,149 @@
+<div class="landing-page">
+
+  <!-- HERO -->
+  <section class="hero-section">
+    <img src="portada.jpeg" alt="Josué y Ahinoam" class="hero-bg-img" />
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow">22 · 08 · 2026</p>
+
+      <h1 class="hero-title">
+        <span class="block">Josué</span>
+        <span class="hero-ampersand">&</span>
+        <span class="block">Ahinoam</span>
+      </h1>
+
+      <p class="hero-sub">Momentos capturados con el corazón</p>
+
+      <a routerLink="/subir" class="hero-btn">
+        Compartir recuerdos
+      </a>
+    </div>
+  </section>
+
+  <!-- DETAILS -->
+  <section id="detalles" class="details-section">
+    <div class="section-inner">
+      <p class="section-label">La historia</p>
+      <h2 class="section-title text-balance">Detalles de un amor</h2>
+      <p class="section-desc">
+        Cada imagen guarda un instante irrepetible: la emoción de una mirada,
+        el temblor de unas manos entrelazadas y la ternura de un “sí” para siempre.
+        Reunimos aquí los detalles más íntimos de esta historia.
+      </p>
+    </div>
+
+    <div class="gallery">
+      @for (photo of detailPhotos; track photo.url) {
+        <div class="gallery-item">
+          <img [src]="photo.url" [alt]="photo.alt" loading="lazy" />
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- METRICS -->
+  <section class="metrics-section">
+    <div class="metrics-header">
+      <p class="metrics-pretitle">Galería en vivo</p>
+      <h2 class="metrics-title text-balance">Cada recuerdo compartido</h2>
+    </div>
+
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+        </div>
+        <div class="metric-value">{{ totalMoments() }}</div>
+        <div class="metric-label">Momentos</div>
+        <div class="metric-hint">Fotos y videos</div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="metric-value">{{ lastActivity() }}</div>
+        <div class="metric-label">Última actividad</div>
+        <div class="metric-hint">Nueva subida</div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="metric-value">{{ uniqueGuests() }}</div>
+        <div class="metric-label">Personas</div>
+        <div class="metric-hint">Han compartido</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAROUSEL -->
+  <section class="carousel-section">
+    <div class="carousel-header">
+      <p class="section-label">Recuerdos</p>
+      <h2 class="section-title text-balance">Momentos que se quedan</h2>
+    </div>
+
+    <div class="carousel">
+      <div class="carousel-track" [style.transform]="'translateX(-' + currentSlide() * 100 + '%)'">
+        @for (card of polaroids; track card.id) {
+          <div class="carousel-slide">
+            <img [src]="card.imageUrl" [alt]="card.description" class="carousel-img" />
+            <div class="carousel-overlay"></div>
+
+            <div class="carousel-content">
+              <p class="carousel-person">{{ card.person }}</p>
+              <p class="carousel-description">{{ card.description }}</p>
+            </div>
+          </div>
+        }
+      </div>
+
+      <!-- Flechas -->
+      <button class="carousel-arrow prev" (click)="prevSlide()" aria-label="Anterior">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </button>
+
+      <button class="carousel-arrow next" (click)="nextSlide()" aria-label="Siguiente">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M9 18l6-6-6-6"/>
+        </svg>
+      </button>
+
+      <!-- Dots -->
+      <div class="carousel-dots">
+        @for (card of polaroids; track card.id; let i = $index) {
+          <button
+            class="dot"
+            [class.active]="currentSlide() === i"
+            (click)="goToSlide(i)"
+            [attr.aria-label]="'Ir a foto ' + (i + 1)">
+          </button>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer-section">
+    <div class="footer-ornament" aria-hidden="true">
+      <span class="footer-line"></span>
+      <svg width="28" height="14" viewBox="0 0 34 16" fill="none">
+        <path d="M17 2c-2.5 3-6 5-11 6 5 1 8.5 3 11 6 2.5-3 6-5 11-6-5-1-8.5-3-11-6Z" stroke="currentColor" stroke-width="1.2" fill="none"/>
+        <circle cx="17" cy="8" r="1.5" fill="currentColor"/>
+      </svg>
+      <span class="footer-line"></span>
+    </div>
+
+    <p class="footer-copy">© {{ currentYear }} Josué & Ahinoam</p>
+    <p class="footer-tagline">Foto & Cine · Capturado con corazón</p>
+
+    <a routerLink="/admin" class="footer-btn">Administrador</a>
+  </footer>
+
+</div>

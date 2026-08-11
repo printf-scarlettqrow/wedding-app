@@ -1,42 +1,4 @@
 <!-- ═══════════════════════════════════════════════════════
-     SCREEN: WELCOME
-═══════════════════════════════════════════════════════ -->
-@if (screen() === 'welcome') {
-  <div class="welcome-page">
-    <!-- Cover photo -->
-    <div class="welcome-cover">
-      <img src="wedding-cover.jpg" alt="Boda de Josué e Ahinoam" class="cover-img" />
-      <div class="cover-overlay"></div>
-
-
-
-      <!-- Identity -->
-      <div class="cover-identity">
-        <p class="cover-eyebrow">galería de fotos</p>
-        <h1 class="cover-names">Josué <em>&amp;</em> Ahinoam</h1>
-        <p class="cover-date">29 · agosto · 2026</p>
-      </div>
-    </div>
-
-    <!-- CTA -->
-    <div class="welcome-cta">
-      <p class="welcome-sub">¡Comparte tus fotos favoritas de este día tan especial!</p>
-      <button class="btn btn-primary btn-lg w-full" (click)="goToInstructions()" id="start-btn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z"/>
-          <circle cx="12" cy="13" r="3"/>
-        </svg>
-        Ir a tomar fotos
-      </button>
-      <a routerLink="/admin" class="btn btn-ghost w-full" id="go-admin-btn">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        Ir a admin
-      </a>
-    </div>
-  </div>
-}
-
-<!-- ═══════════════════════════════════════════════════════
      SCREEN: INSTRUCTIONS
 ═══════════════════════════════════════════════════════ -->
 @if (screen() === 'instructions') {
@@ -133,7 +95,6 @@
 
     <main class="upload-main">
 
-      <!-- Drop zone -->
       <div
         class="drop-zone"
         [class.drag-over]="isDragging()"
@@ -155,8 +116,8 @@
               <circle cx="12" cy="13" r="3"/>
             </svg>
           </div>
-          <p class="drop-title">Toca para abrir la cámara</p>
-          <p class="drop-hint">o selecciona fotos y videos de tu galería</p>
+          <p class="drop-title">Toca para subir fotos</p>
+          <p class="drop-hint">Toma fotos nuevas o selecciona desde tu galería</p>
         </div>
         <input
           #fileInput
@@ -187,7 +148,11 @@
                   <img [src]="item.preview" [alt]="item.file.name" loading="lazy" />
                 }
                 <div class="preview-overlay">
-                  @if (item.status === 'uploading') {
+                  @if (item.status === 'pending') {
+                    <button class="btn-remove-item" (click)="removeItem(item); $event.stopPropagation()" title="Quitar de la lista">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </button>
+                  } @else if (item.status === 'uploading') {
                     <div class="spinner"></div>
                   } @else if (item.status === 'done') {
                     <svg class="ov-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -195,6 +160,17 @@
                     <svg class="ov-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                   }
                 </div>
+                @if (item.status === 'pending' || item.status === 'error') {
+                  <div class="desc-input-container" style="position: absolute; bottom: 0; left: 0; right: 0; padding: 4px; background: rgba(255,255,255,0.9); z-index: 5;">
+                    <input type="text"
+                      [value]="item.description"
+                      (input)="item.description = $any($event.target).value"
+                      placeholder="Añade una descripción..."
+                      style="width: 100%; border: 1px solid #ccc; border-radius: 4px; padding: 4px 8px; font-size: 12px; color: #333;"
+                      (click)="$event.stopPropagation()"
+                    />
+                  </div>
+                }
               </div>
             }
           </div>
