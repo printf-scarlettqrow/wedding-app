@@ -43,7 +43,7 @@ import { SupabaseService, Photo } from '../../core/services/supabase.service';
             </svg>
             <h2 class="empty-title">La galería está vacía</h2>
             <p class="empty-sub">¡Sé el primer invitado en subir una foto!</p>
-            <a routerLink="/" class="btn btn-primary mt-2" id="go-upload-btn">Subir una foto</a>
+            <a routerLink="/subir" class="btn btn-primary mt-2" id="go-upload-btn">Subir una foto</a>
           </div>
         } @else {
           <div class="photo-grid" role="list">
