@@ -116,9 +116,20 @@
               <circle cx="12" cy="13" r="3"/>
             </svg>
           </div>
-          <p class="drop-title">Toca para subir fotos</p>
-          <p class="drop-hint">Toma fotos nuevas o selecciona desde tu galería</p>
+          <p class="drop-title" style="margin-bottom: 12px;">Seleccionar desde:</p>
+          <div style="display: flex; gap: 12px; justify-content: center; z-index: 10;">
+            <button class="btn" (click)="cameraInput.click(); $event.stopPropagation()" style="padding: 8px 16px; font-size: 14px; border-radius: 6px; border: 1px solid rgba(0,0,0,0.15); background: white; color: #333; font-weight: 500;">Cámara</button>
+            <button class="btn" (click)="fileInput.click(); $event.stopPropagation()" style="padding: 8px 16px; font-size: 14px; border-radius: 6px; border: 1px solid rgba(0,0,0,0.15); background: white; color: #333; font-weight: 500;">Archivos</button>
+          </div>
         </div>
+        <input
+          #cameraInput
+          type="file"
+          accept="image/*,video/*"
+          capture="environment"
+          hidden
+          (change)="onFilesSelected($event)"
+        />
         <input
           #fileInput
           type="file"
@@ -199,7 +210,7 @@
 
     <!-- Bottom nav -->
     <nav class="bottom-nav" aria-label="Navegación">
-      <a routerLink="/" class="bottom-nav-tab active" id="nav-upload">
+      <a routerLink="/subir" class="bottom-nav-tab active" id="nav-upload">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
         Subir
       </a>
